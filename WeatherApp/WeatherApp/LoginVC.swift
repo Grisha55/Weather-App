@@ -74,7 +74,7 @@ class LoginVC: UIViewController {
     
     @objc
     func loginButtonAction() {
-        print("I'm tapped!")
+        navigationController?.pushViewController(TabBarVC(), animated: true)
     }
     
     private func constraintsForLoginbutton() {
