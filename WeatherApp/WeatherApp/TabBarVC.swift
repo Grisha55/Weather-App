@@ -24,7 +24,7 @@ class TabBarVC: UITabBarController {
     
     func setupVCs() {
         viewControllers = [
-            WeatherDataVC()
+            CitiesVC()
         ]
     }
 

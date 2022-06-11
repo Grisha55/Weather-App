@@ -7,21 +7,29 @@
 
 import UIKit
 
-class WeatherDataVC: UIViewController {
+class CitiesVC: UIViewController {
 
     private let tableView = UITableView()
+    let cellID = "cellId"
+    var cities = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.addSubview(tableView)
+        tableView.register(CityCell.self, forCellReuseIdentifier: cellID)
         tableView.dataSource = self
         tableView.delegate = self
         
         constraintsForTableView()
+        createWeathersArray()
     }
     
     // Methods
+    
+    private func createWeathersArray() {
+        cities = ["Moscow", "Yaroslavl", "Paris", "London", "Madrid"]
+    }
     
     private func constraintsForTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -34,13 +42,19 @@ class WeatherDataVC: UIViewController {
 
 }
 
-extension WeatherDataVC: UITableViewDataSource, UITableViewDelegate {
+extension CitiesVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        cell.textLabel?.text = cities[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return cities.count
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        ///
+    }
+    
 }
