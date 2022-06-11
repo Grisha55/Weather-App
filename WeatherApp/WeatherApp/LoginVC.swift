@@ -74,7 +74,14 @@ class LoginVC: UIViewController {
     
     @objc
     func loginButtonAction() {
-        navigationController?.pushViewController(TabBarVC(), animated: true)
+        if loginTF.text == "12345" && passwordTF.text == "123" {
+            navigationController?.pushViewController(TabBarVC(), animated: true)
+        } else {
+            let alertController = UIAlertController(title: "ERROR!!!", message: "Please check you login/password", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "cancel", style: .cancel)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true)
+        }
     }
     
     private func constraintsForLoginbutton() {
