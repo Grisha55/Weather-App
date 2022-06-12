@@ -54,7 +54,19 @@ extension CitiesVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        ///
+        navigationController?.pushViewController(WeatherVC(), animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            cities.remove(at: indexPath.row)
+            tableView.reloadData()
+        case .insert:
+            cities.append("New")
+        default:
+            print("Default case")
+        }
     }
     
 }
