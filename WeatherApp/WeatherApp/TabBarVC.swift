@@ -15,7 +15,7 @@ class TabBarVC: UITabBarController {
         view.backgroundColor = .systemBackground
         UITabBar.appearance().barTintColor = .systemBackground
         tabBar.tintColor = .label
-        self.title = "Weather"
+        self.title = "Cities"
         
         setupVCs()
     }
@@ -24,8 +24,16 @@ class TabBarVC: UITabBarController {
     
     func setupVCs() {
         viewControllers = [
-            CitiesVC()
+            createVC(for: CitiesVC(), title: NSLocalizedString("City", comment: ""), image: UIImage()),
         ]
     }
 
+    fileprivate func createVC(for vc: UIViewController, title: String, image: UIImage) -> UIViewController {
+        let navController = UINavigationController(rootViewController: vc)
+        navController.tabBarItem.title = title
+        navController.tabBarItem.image = image
+        navController.navigationBar.prefersLargeTitles = true
+        vc.navigationItem.title = title
+        return vc
+    }
 }
