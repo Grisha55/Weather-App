@@ -58,6 +58,7 @@ class WeatherCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .systemBlue
+        contentView.layer.cornerRadius = 20
         addSubview(stack)
         stack.addArrangedSubview(degreeLabel)
         stack.addArrangedSubview(weatherImageView)

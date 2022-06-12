@@ -32,7 +32,6 @@ class TabBarVC: UITabBarController {
         let navController = UINavigationController(rootViewController: vc)
         navController.tabBarItem.title = title
         navController.tabBarItem.image = image
-        navController.navigationBar.prefersLargeTitles = true
         vc.navigationItem.title = title
         return vc
     }

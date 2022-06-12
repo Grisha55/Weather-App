@@ -54,7 +54,9 @@ extension CitiesVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(WeatherVC(), animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+        navigationController?.present(WeatherVC(), animated: true)
+        self.modalPresentationStyle = .fullScreen
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
