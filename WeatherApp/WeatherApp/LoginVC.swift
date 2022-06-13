@@ -9,6 +9,8 @@ import UIKit
 
 class LoginVC: UIViewController {
     
+    let interactiveTransition = CustomInteractiveTransition()
+    
     private let loginLabel: UILabel = {
         let loginLabel = UILabel()
         loginLabel.text = "Login"
@@ -55,6 +57,7 @@ class LoginVC: UIViewController {
         view.addSubview(passwordLabel)
         view.addSubview(passwordTF)
         view.addSubview(loginButton)
+        navigationController?.delegate = self
         
         setupNavBar()
         setupLoginButtonAction()
@@ -64,9 +67,55 @@ class LoginVC: UIViewController {
         constraintsForPasswordLabel()
         constraintsForPasswordTF()
         constraintsForLoginbutton()
+        
+        animateTitlesAppearing()
+        animateButtonAppearing()
+        animateFieldsAppearing()
     }
     
     // Methods
+    
+    private func animateFieldsAppearing() {
+        let fadeInAnimation = CABasicAnimation(keyPath: "opacity")
+        fadeInAnimation.fromValue = 0
+        fadeInAnimation.toValue = 1
+        fadeInAnimation.duration = 1
+        fadeInAnimation.beginTime = CACurrentMediaTime() + 1
+        fadeInAnimation.fillMode = CAMediaTimingFillMode.backwards
+        
+        self.loginTF.layer.add(fadeInAnimation, forKey: nil)
+        self.passwordTF.layer.add(fadeInAnimation, forKey: nil)
+    }
+    
+    private func animateButtonAppearing() {
+        self.loginButton.transform = CGAffineTransform(translationX: 0, y: self.view.bounds.height / 2)
+        
+        UIView.animate(withDuration: 1,
+                       delay: 1,
+                       usingSpringWithDamping: 0.5,
+                       initialSpringVelocity: 0,
+                       options: .curveEaseOut,
+                       animations: {
+                            self.loginButton.transform = .identity
+                        },
+                       completion: nil)
+    }
+    
+    private func animateTitlesAppearing() {
+        let offset = view.bounds.width
+        loginLabel.transform = CGAffineTransform(translationX: -offset, y: 0)
+        passwordLabel.transform = CGAffineTransform(translationX: offset, y: 0)
+        
+        UIView.animate(withDuration: 1,
+                       delay: 1,
+                       options: .curveEaseOut,
+                       animations: {
+            self.loginLabel.transform = .identity
+            self.passwordLabel.transform = .identity
+        },
+        completion: nil)
+
+    }
     
     func setupLoginButtonAction() {
         loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
@@ -125,3 +174,21 @@ class LoginVC: UIViewController {
 
 }
 
+extension LoginVC: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if operation == .push {
+            self.interactiveTransition.viewController = toVC
+            return CustomPushAnimator()
+        } else if operation == .pop {
+            if navigationController.viewControllers.first != toVC {
+                self.interactiveTransition.viewController = toVC
+            }
+            return CustomPopAnimator()
+        }
+        return nil
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactiveTransition.hasStarted ? interactiveTransition : nil
+    }
+}
