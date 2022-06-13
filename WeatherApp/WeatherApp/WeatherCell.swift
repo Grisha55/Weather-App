@@ -24,7 +24,11 @@ class WeatherCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 60
+        label.layer.borderWidth = 1.0
+        label.layer.borderColor = UIColor.black.cgColor
         return label
     }()
     
@@ -32,39 +36,24 @@ class WeatherCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 12
-        imageView.backgroundColor = .white
         return imageView
     }()
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .gray
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 15)
         return label
     }()
     
-    private let stack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .center
-        stack.contentMode = .center
-        stack.distribution = .fill
-        stack.spacing = 10
-        return stack
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .systemBlue
-        contentView.layer.cornerRadius = 20
-        addSubview(stack)
-        stack.addArrangedSubview(degreeLabel)
-        stack.addArrangedSubview(weatherImageView)
-        stack.addArrangedSubview(dateLabel)
         
-        constraintsForStack()
+        addSubview(weatherImageView)
+        addSubview(degreeLabel)
+        addSubview(dateLabel)
+        
         constraintsForWeatherImageView()
         constraintsForDegreeLabel()
         constraintsForDateLabel()
@@ -74,30 +63,25 @@ class WeatherCell: UICollectionViewCell {
     
     private func constraintsForDateLabel() {
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        dateLabel.topAnchor.constraint(equalTo: degreeLabel.bottomAnchor, constant: 3).isActive = true
+        dateLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     }
     
     private func constraintsForDegreeLabel() {
         degreeLabel.translatesAutoresizingMaskIntoConstraints = false
-        degreeLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        degreeLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        degreeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        degreeLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        degreeLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        degreeLabel.heightAnchor.constraint(equalToConstant: 120).isActive = true
     }
     
     private func constraintsForWeatherImageView() {
         weatherImageView.translatesAutoresizingMaskIntoConstraints = false
-        weatherImageView.centerXAnchor.constraint(equalTo: stack.centerXAnchor).isActive = true
-        weatherImageView.leadingAnchor.constraint(equalTo: stack.leadingAnchor, constant: 10).isActive = true
-        weatherImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        weatherImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        weatherImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        weatherImageView.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        weatherImageView.bottomAnchor.constraint(equalTo: degreeLabel.topAnchor, constant: 10).isActive = true
     }
-    
-    private func constraintsForStack() {
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        stack.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        stack.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        stack.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-    }
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

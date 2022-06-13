@@ -11,13 +11,14 @@ class CitiesVC: UIViewController {
 
     private let tableView = UITableView()
     let cellID = "cellId"
-    var cities = [String]()
+    var cities = [CityStruct]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.addSubview(tableView)
         tableView.register(CityCell.self, forCellReuseIdentifier: cellID)
+        tableView.register(TableHeader.self, forHeaderFooterViewReuseIdentifier: TableHeader.identifier)
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -28,7 +29,7 @@ class CitiesVC: UIViewController {
     // Methods
     
     private func createWeathersArray() {
-        cities = ["Moscow", "Yaroslavl", "Paris", "London", "Madrid"]
+        cities = [CityStruct(name: "Moscow", emblem: UIImage(systemName: "multiply.circle.fill")!), CityStruct(name: "Yaroslavl", emblem: UIImage(systemName: "house")!), CityStruct(name: "Kaliningrad", emblem: UIImage(systemName: "house")!)]
     }
     
     private func constraintsForTableView() {
@@ -44,13 +45,26 @@ class CitiesVC: UIViewController {
 
 extension CitiesVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        cell.textLabel?.text = cities[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! CityCell
+        cell.cityStruct = cities[indexPath.row]
         return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cities.count
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableHeader.identifier) as! TableHeader
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 150
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -65,7 +79,7 @@ extension CitiesVC: UITableViewDataSource, UITableViewDelegate {
             cities.remove(at: indexPath.row)
             tableView.reloadData()
         case .insert:
-            cities.append("New")
+            cities.insert(CityStruct(name: "Unknown", emblem: UIImage()), at: 0)
         default:
             print("Default case")
         }
