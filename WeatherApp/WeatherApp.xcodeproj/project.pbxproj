@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		BE62CE9E2855CDE400DBE68A /* WeatherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE62CE9D2855CDE400DBE68A /* WeatherVC.swift */; };
 		BE62CEA02855D5BC00DBE68A /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE62CE9F2855D5BC00DBE68A /* WeatherCell.swift */; };
+		BEA2230528588A060068280A /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2230428588A060068280A /* WeatherService.swift */; };
+		BEA2230728589BA40068280A /* ServiceStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2230628589BA40068280A /* ServiceStructs.swift */; };
 		BEA3B0E028567972002D1866 /* WeakDayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA3B0DF28567972002D1866 /* WeakDayPicker.swift */; };
 		BEA3B0E2285708D5002D1866 /* CityStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA3B0E1285708D5002D1866 /* CityStruct.swift */; };
 		BEA3B0E428571FA8002D1866 /* TableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA3B0E328571FA8002D1866 /* TableHeader.swift */; };
@@ -30,6 +32,8 @@
 /* Begin PBXFileReference section */
 		BE62CE9D2855CDE400DBE68A /* WeatherVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherVC.swift; sourceTree = "<group>"; };
 		BE62CE9F2855D5BC00DBE68A /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
+		BEA2230428588A060068280A /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		BEA2230628589BA40068280A /* ServiceStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceStructs.swift; sourceTree = "<group>"; };
 		BEA3B0DF28567972002D1866 /* WeakDayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakDayPicker.swift; sourceTree = "<group>"; };
 		BEA3B0E1285708D5002D1866 /* CityStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityStruct.swift; sourceTree = "<group>"; };
 		BEA3B0E328571FA8002D1866 /* TableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeader.swift; sourceTree = "<group>"; };
@@ -61,6 +65,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BEA22303285889DA0068280A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				BEA2230428588A060068280A /* WeatherService.swift */,
+				BEA2230628589BA40068280A /* ServiceStructs.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		BEA3B0DE2856730B002D1866 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +114,7 @@
 			children = (
 				BEE609842854E143008C1825 /* AppDelegate.swift */,
 				BEE609862854E143008C1825 /* SceneDelegate.swift */,
+				BEA22303285889DA0068280A /* Services */,
 				BEA3B0DE2856730B002D1866 /* Model */,
 				BEA3B0EB2857C188002D1866 /* Custom Transitions */,
 				BEE609882854E143008C1825 /* LoginVC.swift */,
@@ -199,10 +213,12 @@
 				BEA3B0E82857BAC8002D1866 /* CustomPushAnimator.swift in Sources */,
 				BEA3B0E428571FA8002D1866 /* TableHeader.swift in Sources */,
 				BE62CE9E2855CDE400DBE68A /* WeatherVC.swift in Sources */,
+				BEA2230728589BA40068280A /* ServiceStructs.swift in Sources */,
 				BEA3B0E2285708D5002D1866 /* CityStruct.swift in Sources */,
 				BEA3B0E6285780CD002D1866 /* WeatherCollectionViewLayout.swift in Sources */,
 				BEE609A128553648008C1825 /* CityCell.swift in Sources */,
 				BEE6099F285526E6008C1825 /* TabBarVC.swift in Sources */,
+				BEA2230528588A060068280A /* WeatherService.swift in Sources */,
 				BEE609852854E143008C1825 /* AppDelegate.swift in Sources */,
 				BEE609872854E143008C1825 /* SceneDelegate.swift in Sources */,
 			);
